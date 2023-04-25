@@ -1,65 +1,33 @@
-const express =require('express')
-const { param } = require('./services')
+const express=require('express')
 const router=express.Router()
-
-let listofservices=[
-    {
-        "id":1,
-        "Name":"webdevelopment"
-
-    },
-    {
-        "id":1,
-        "Name":"digital"
-
-    },
-    {
-        "id":3,
-        "Name":"bigdata"
-
-    
-    }
-
-]
+const arraylen=2
 router.get('/',(request,response)=>{
-    response.send("hloo")
+    response.send("the new file ")
 })
 router.get('/:id',(request,response)=>{
-    const routerId=Number(request.params.id)
-    const getRouter=listofservices.find((router)=>router.id===routerId)
-    if(!getRouter)
+    const userid=(request.params.id)
+    if(userid<arraylen)
     {
-        response.status(500).send("Expected service not found")
-        console.log(request.params.id);
+        response.send(request.Nameofuser.name)
     }
-    else
-    {
-        response.json(getRouter)
+    else{
+        response.send('Invalid number');
     }
-    
+    response.send(request.Nameofuser.name)
 })
 
 
+const user=[{
+    name:'Web Development'
+},
+{
+    name:'Data Science'
+}
 
 
+]
+router.param('id',(request,response,next,id)=>{
+    request.Nameofuser=user[id]
+    next()
+})
 module.exports=router
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
