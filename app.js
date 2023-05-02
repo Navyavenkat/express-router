@@ -1,19 +1,20 @@
 const express=require('express')
 const app=express()
-const secPage=require('./secPage.js')
 
-const servicePage=require('./services.js')
-const HomePage=require('./HomePage.js')
-const about=require('./about.js')
-const contact=require('./contact.js')
+
+const UserPage=require('./users.js')
+
+
+//app.use(express.static('Public'))
+
+
+app.set('view engine','ejs')
+app.use(express.urlencoded({extended:true}))
 app.get('/',(request,response) =>{
     
-   response.send("Get Router on Home Page")
+   response.render("index", {text:'qwerty'})
 })
-app.use('/secPage',secPage)
 
-app.use('/services',servicePage)
-app.use('/HomePage',HomePage)
-app.use('/about',about)
-app.use('/contact',contact)
+app.use('/users',UserPage)
+
 app.listen(3800)
